@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUK</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f8f9fa; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .search-box, .order-info { margin-bottom: 20px; }
+        .product { display: flex; align-items: center; justify-content: space-between; border: 1px solid #ddd; padding: 10px; margin: 10px; background: white; border-radius: 8px; }
+        img { width: 80px; height: 80px; border-radius: 5px; cursor: pointer; transition: transform 0.2s; }
+        img:hover { transform: scale(1.5); }
+        input[type=number] { width: 50px; text-align: center; }
+        button { padding: 10px; background: green; color: white; border: none; cursor: pointer; margin-top: 10px; border-radius: 5px; }
+    </style>
+    <script>
+        function orderProducts() {
+            let phoneNumber = "6281255712863"; // Ganti dengan nomor WhatsApp tujuan
+            let salesName = document.getElementById('salesName').value;
+            let storeName = document.getElementById('storeName').value;
+            
+            if (salesName.trim() === "" || storeName.trim() === "") {
+                alert("Harap isi Nama Sales dan Nama Toko terlebih dahulu.");
+                return;
+            }
+            
+            let selectedProducts = [];
+            document.querySelectorAll('.product').forEach((product) => {
+                let qty = product.querySelector('input[type=number]').value;
+                if (qty > 0) {
+                    let name = product.querySelector('h3').innerText;
+                    selectedProducts.push(`- ${name} x${qty}`);
+                }
+            });
+            if (selectedProducts.length === 0) {
+                alert("Pilih setidaknya satu produk dengan jumlah lebih dari 0.");
+                return;
+            }
+            
+            let message = `Nama Sales: ${salesName}%0A`;
+            message += `Nama Toko: ${storeName}%0A`;
+            message += `Pesanan:%0A` + selectedProducts.join("%0A");
+            
+            window.location.href = "https://wa.me/" + phoneNumber + "?text=" + message;
+        }
+
+        function searchProduct() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                let productName = product.querySelector('h3').innerText.toLowerCase();
+                product.style.display = productName.includes(input) ? 'flex' : 'none';
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>HANYA UNTUK SALES</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" onkeyup="searchProduct()" placeholder="Cari produk...">
+        </div>
+        <div class="order-info">
+            <input type="text" id="salesName" placeholder="Nama Sales">
+            <input type="text" id="storeName" placeholder="Nama Toko">
+        </div>
+        <div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/1.jpeg" alt="Vitamin 1" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk A</h3>
+            <p>Rp50.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+        <div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/2.jpeg" alt="Vitamin 2" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk B</h3>
+            <p>Rp75.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+        <div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/3.jpeg" alt="Vitamin 3" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk C</h3>
+            <p>Rp100.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+		<div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/3.jpeg" alt="Vitamin 3" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk D</h3>
+            <p>Rp100.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+		<div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/3.jpeg" alt="Vitamin 3" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk F</h3>
+            <p>Rp100.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+		<div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/3.jpeg" alt="Vitamin 3" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk G</h3>
+            <p>Rp100.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+		<div class="product">
+            <img src="F:\PROJECT\PENAWARAN\FOTO/3.jpeg" alt="Vitamin 3" onclick="this.style.transform='scale(2)'; setTimeout(()=>this.style.transform='scale(1)', 1000)">
+            <h3>Produk H</h3>
+            <p>Rp100.000</p>
+            <input type="number" value="0" min="0">
+        </div>
+        <button onclick="orderProducts()">Pesan via WhatsApp</button>
+    </div>
+</body>
+</html>
